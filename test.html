@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./4Wherefore-art-thou.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-    </script>
-</body>
+      function containsDuplicate(nums) {
+        const count = {};
+        for (let index = 0; index < nums.length; index++) {
+          console.log(count.hasOwnProperty(nums[index]));
+          if (!count.hasOwnProperty(nums[index])) {
+            count[nums[index]] = nums[index];
+          } else {
+            console.log(count);
+            return true;
+          }
+        }
 
+        return false;
+      }
+      containsDuplicate([5, 6, 7, 6, 7, 8, 8, 8, 8, 8, 8]);
+    </script>
+  </body>
 </html>
