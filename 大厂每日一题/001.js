@@ -24,27 +24,40 @@ function Prom(execute) {
   const reject = (error) => {
     this.status = Rejected
     this.value = error
+    this.failQueue.forEach((fn) => {
+      fn(this.value)
+    })
   }
   execute(reslove, reject)
 }
 Prom.prototype.then = function (success, fail) {
-  if (this.status === Pending) {
-    this.successQueue.push(success)
-    this.failQueue.push(fail)
-  } else if (this.status === Fulfilled) {
-    success(this.value)
-  } else {
-    fail(this.value)
-  }
+  return new Prom((resolve, reject) => {
+    if (this.status === Pending) {
+      this.successQueue.push(success)
+      this.failQueue.push(fail)
+    } else if (this.status === Fulfilled) {
+      success(this.value)
+    } else {
+      fail(this.value)
+    }
+  })
 }
 let prom = new Prom(function (res, rej) {
-  setTimeout(() => {
-    res('done')
-  }, 2000)
+  // setTimeout(() => {
+  //   res('done')
+  // }, 2000)
+  res(1)
 })
-prom.then(
-  function (result) {
-    console.log(result)
-  },
-  function (error) {}
-)
+prom
+  .then(
+    function (result) {
+      console.log(result)
+    },
+    function (error) {}
+  )
+  .then(
+    (result) => {
+      console.log(result)
+    },
+    (error) => {}
+  )
