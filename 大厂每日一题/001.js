@@ -5,7 +5,9 @@
 // 1.立即resolve,done
 // 2.异步resolve,done
 // 3.状态一旦改变，不会再发生变化,done
-// 4.promise 可以then多次，promise 的then 方法返回一个 promise，todo
+// 4.promise 可以then多次，promise 的then 方法返回一个 promise，done
+// 5.支持立即reslove的resolve(promise),done
+// 6.支持异步reslove的resolve(promise),todo
 const Pending = Symbol()
 const Fulfilled = Symbol()
 const Rejected = Symbol()
@@ -15,10 +17,19 @@ function Prom(execute) {
   this.successQueue = []
   this.failQueue = []
   const reslove = (value) => {
+    if (typeof value === 'object') {
+      var then = value.then
+      if (typeof then === 'function') {
+        then.call(value, reslove)
+        return
+      }
+    }
     this.status = Fulfilled
     this.value = value
-    this.successQueue.forEach((fn) => {
-      fn(this.value)
+    console.log(11, this.successQueue)
+    this.successQueue.forEach((fnPair) => {
+      let res = fnPair.callback(this.value)
+      fnPair.resolve(res)
     })
   }
   const reject = (error) => {
@@ -31,33 +42,38 @@ function Prom(execute) {
   execute(reslove, reject)
 }
 Prom.prototype.then = function (success, fail) {
-  return new Prom((resolve, reject) => {
+  let prom2 = new Prom((resolve, reject) => {
     if (this.status === Pending) {
-      this.successQueue.push(success)
-      this.failQueue.push(fail)
+      this.successQueue.push({ callback: success, resolve: resolve })
+      // this.failQueue.push(fail)
     } else if (this.status === Fulfilled) {
-      success(this.value)
+      let thenRes = success(this.value)
+      resolve(thenRes)
     } else {
       fail(this.value)
     }
   })
+  return prom2
 }
-let prom = new Prom(function (res, rej) {
+let prom = new Prom(function (resolve, reject) {
   // setTimeout(() => {
-  //   res('done')
+  //   resolve(1)
   // }, 2000)
-  res(1)
+  resolve(1)
 })
 prom
+  .then(
+    function (result) {
+      return new Prom((resolve, reject) => {
+        console.log(result)
+        resolve('我是prom')
+      })
+    },
+    function (error) {}
+  )
   .then(
     function (result) {
       console.log(result)
     },
     function (error) {}
-  )
-  .then(
-    (result) => {
-      console.log(result)
-    },
-    (error) => {}
   )
