@@ -1,8 +1,12 @@
-var arr = [1, 2, 3, 4, 5]
-var t = new Object()
-arr.forEach((item) => {
-  console.log(item)
-})
-function b() {}
-console.log(typeof b === 'object', typeof b === 'function')
-console.log(b.hasOwnProperty)
+var triangle = { a: 1, b: 2, c: 3 }
+
+function ColoredTriangle() {
+  this.color = 'red'
+}
+// ColoredTriangle.prototype = triangle
+
+var obj = new ColoredTriangle()
+
+for (var prop in obj) {
+  console.log(`obj.${prop} = ${obj[prop]}`)
+}

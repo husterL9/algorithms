@@ -9,21 +9,37 @@
 
   <body>
     <script>
-      function containsDuplicate(nums) {
-        const count = {};
-        for (let index = 0; index < nums.length; index++) {
-          console.log(count.hasOwnProperty(nums[index]));
-          if (!count.hasOwnProperty(nums[index])) {
-            count[nums[index]] = nums[index];
-          } else {
-            console.log(count);
-            return true;
-          }
-        }
-
-        return false;
+      let room = {
+        number: 23,
       }
-      containsDuplicate([5, 6, 7, 6, 7, 8, 8, 8, 8, 8, 8]);
+
+      let meetup = {
+        title: 'Conference',
+        participants: ['john', 'ann'],
+      }
+
+      meetup.place = room // meetup 引用了 room
+      room.occupiedBy = meetup
+      function cloneDeep(source, hash = new WeakMap()) {
+        if (typeof source !== 'object' || source === null) {
+          return source
+        }
+        if (hash.has(source)) {
+          return hash.get(source)
+        }
+        const target = Array.isArray(source) ? [] : {}
+        Reflect.ownKeys(source).forEach((key) => {
+          const val = source[key]
+          if (typeof val === 'object' && val != null) {
+            target[key] = cloneDeep(val, hash)
+          } else {
+            target[key] = val
+          }
+        })
+        return target
+      }
+      let p = cloneDeep(meetup)
+      console.log(p, meetup)
     </script>
   </body>
 </html>
