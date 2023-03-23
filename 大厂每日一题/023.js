@@ -1,23 +1,17 @@
 //https://jishuin.proginn.com/p/763bfbd67a9b
-//https://fairyly.github.io/interview/3.3.1%20Async---Await%E5%8E%9F%E7%90%86.html#%E7%AE%80%E4%BB%8B
-function* generateSequence(start, end) {
-  for (let i = start; i <= end; i++) yield i
+async function target() {
+  let res = await fetch('https://www.baidu.com')
+  console.log('do something')
+  let res1 = await fetch('https://www.baidu.com')
+  return res
 }
-
-function* generatePasswordCodes() {
-  // 0..9
-  yield* generateSequence(48, 57)
-
-  // A..Z
-  yield* generateSequence(65, 90)
-
-  // a..z
-  yield* generateSequence(97, 122)
+let res = target().then((res) => {
+  console.log(res)
+})
+function* gen() {}
+function immitate(generator) {
+  return function () {
+    return new Promise((resolve, reject) => {})
+  }
 }
-
-let str = ''
-
-for (let code of generatePasswordCodes()) {
-  console.log(code)
-  str += String.fromCharCode(code)
-}
+let asyncFn = immitate(gen)
