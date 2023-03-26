@@ -8,38 +8,6 @@
   </head>
 
   <body>
-    <script>
-      let room = {
-        number: 23,
-      }
-
-      let meetup = {
-        title: 'Conference',
-        participants: ['john', 'ann'],
-      }
-
-      meetup.place = room // meetup 引用了 room
-      room.occupiedBy = meetup
-      function cloneDeep(source, hash = new WeakMap()) {
-        if (typeof source !== 'object' || source === null) {
-          return source
-        }
-        if (hash.has(source)) {
-          return hash.get(source)
-        }
-        const target = Array.isArray(source) ? [] : {}
-        Reflect.ownKeys(source).forEach((key) => {
-          const val = source[key]
-          if (typeof val === 'object' && val != null) {
-            target[key] = cloneDeep(val, hash)
-          } else {
-            target[key] = val
-          }
-        })
-        return target
-      }
-      let p = cloneDeep(meetup)
-      console.log(p, meetup)
-    </script>
+    <script></script>
   </body>
 </html>

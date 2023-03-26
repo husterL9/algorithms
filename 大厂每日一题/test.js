@@ -1,12 +1,5 @@
-var triangle = { a: 1, b: 2, c: 3 }
-
-function ColoredTriangle() {
-  this.color = 'red'
+async function a() {
+  let res = await Promise.resolve('2')
+  console.log(res)
 }
-// ColoredTriangle.prototype = triangle
-
-var obj = new ColoredTriangle()
-
-for (var prop in obj) {
-  console.log(`obj.${prop} = ${obj[prop]}`)
-}
+a()
