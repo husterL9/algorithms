@@ -18,7 +18,7 @@ void (async function () {
   for (let i = 0; i < b; i++) {
     arr[0][i] === '.' ? (resArr[0][i] = 1) : (resArr[0][i] = 0)
   }
-  for (let j = 0; j < a; j++) {
+  for (let j = 1; j < a; j++) {
     arr[j][0] === '.' ? (resArr[j][0] = 1) : (resArr[j][0] = 0)
   }
   console.log(resArr)
