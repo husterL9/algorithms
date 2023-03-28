@@ -12,20 +12,40 @@ void (async function () {
     let lines = (await readline()).split('')
     arr[i] = lines
   }
-
-  let resArr = new Array(a).fill(new Array(b).fill(0))
-
+  let resArr = new Array(a)
+  for (let index = 0; index < a; index++) {
+    resArr[index] = new Array(b)
+  }
+  let flag = true
   for (let i = 0; i < b; i++) {
-    arr[0][i] === '.' ? (resArr[0][i] = 1) : (resArr[0][i] = 0)
-  }
-  for (let j = 1; j < a; j++) {
-    arr[j][0] === '.' ? (resArr[j][0] = 1) : (resArr[j][0] = 0)
-  }
-  console.log(resArr)
-  for (let k = 1; k < a; k++) {
-    for (let m = 1; m < b; m++) {
-      resArr[k][m] = resArr[k - 1][m] + resArr[k][m - 1]
+    if (flag) {
+      if (arr[0][i] === '.') {
+        resArr[0][i] = 1
+      } else {
+        resArr[0][i] = 0
+        flag = false
+      }
+    } else {
+      resArr[0][i] = 0
     }
   }
-  console.log(resArr, arr)
+  flag = true
+  for (let j = 0; j < a; j++) {
+    if (flag) {
+      if (arr[j][0] === '.') {
+        resArr[j][0] = 1
+      } else {
+        resArr[j][0] = 0
+        flag = false
+      }
+    } else {
+      resArr[j][0] = 0
+    }
+  }
+  for (let k = 1; k < a; k++) {
+    for (let m = 1; m < b; m++) {
+      arr[k][m] === '#' ? (resArr[k][m] = 0) : (resArr[k][m] = resArr[k - 1][m] + resArr[k][m - 1])
+    }
+  }
+  console.log(resArr)
 })()

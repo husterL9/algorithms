@@ -8,9 +8,9 @@ var minArray = function (numbers) {
       return numbers[left]
     }
     let mid = Math.floor((left + right) / 2)
-    if (nums[mid] < nums[left]) {
+    if (nums[mid] < nums[right]) {
       return search(left, mid, nums)
-    } else if (nums[mid] > nums[left]) {
+    } else if (nums[mid] > nums[right]) {
       return search(mid + 1, right, nums)
     } else {
       return search(left, right - 1, nums)
