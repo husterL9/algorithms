@@ -29,24 +29,5 @@ var postorderTraversal = function (root) {
     return res
   }
   //[1,null,2,3]
-  stack.push(root)
-  while (root && stack.length > 0) {
-    let leftNode = root.left
-    let rightNode = root.right
-    while (leftNode) {
-      stack.push(leftNode)
-      leftNode = leftNode.left
-      if (leftNode) {
-        rightNode = leftNode.right
-      }
-    }
-
-    if (rightNode) {
-      root = rightNode
-    } else {
-      let node = stack.pop()
-      res.push(node.val)
-    }
-  }
-  return res
+  while (roo) {}
 }
