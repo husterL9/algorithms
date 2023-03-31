@@ -9,19 +9,29 @@
 
   <body>
     <script>
-      let arr = [
-        ['.', '.', '#', '#'],
-        ['#', '.', '.', '.'],
-      ]
-      let resArr = new Array(2).fill(new Array(4).fill(0))
-      console.log(arr)
-      for (let i = 0; i < 4; i++) {
-        arr[0][i] === '.' ? (resArr[0][i] = 1) : (resArr[0][i] = 0)
+      let req1 = () => fetch(`http://www.kuaidi100.com/query?type=shunfeng&postid=0`)
+
+      let req2 = () => fetch(`http://www.kuaidi100.com/query?type=shunfeng&postid=1`)
+
+      let req3 = () => fetch(`http://www.kuaidi100.com/query?type=shunfeng&postid=2`)
+
+      // promise.all
+      const res = Promise.all([req1(), req2(), req3()])
+
+      const res1 = req1()
+      const res2 = req2()
+      const res3 = req3()
+
+      // await
+      const u1 = async function () {
+        await res1
       }
-      // for (let j = 1; j < 2; j++) {
-      //   arr[j][0] === '.' ? (resArr[j][0] = 1) : (resArr[j][0] = 0)
-      // }
-      console.log(resArr)
+      const u2 = async function () {
+        await res2
+      }
+      const u3 = async function () {
+        await res3
+      }
     </script>
   </body>
 </html>
