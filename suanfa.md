@@ -1,7 +1,5 @@
 # 数据结构入门
 
- 
-
 # 剑指offer
 
 ## 24反转链表
@@ -47,7 +45,9 @@ O(m+n)的解法
 
 ## 023实现async/await
 
-## 027 LRU
+## 032裁剪头像
+
+## 033 v8垃圾回收
 
 # 数据结构基础
 
@@ -65,4 +65,4 @@ https://segmentfault.com/a/1190000039691657
 
 diff:[15张图，20分钟吃透Diff算法核心原理，我说的！！！ - 掘金](https://juejin.cn/post/6994959998283907102)
 
-插槽：
+插槽：[slot | Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/v2/extend/slot.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)

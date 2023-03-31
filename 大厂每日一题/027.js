@@ -3,20 +3,39 @@
 /**
  * @param {number} capacity
  */
-var LRUCache = function (capacity) {}
+var LRUCache = function (capacity) {
+  this.capacity = capacity
+  this.cache = new Map()
+}
 
 /**
  * @param {number} key
  * @return {number}
  */
-LRUCache.prototype.get = function (key) {}
+LRUCache.prototype.get = function (key) {
+  if (this.cache.has(key)) {
+    let value = this.cache.get(key)
+    this.cache.delete(key)
+    this.cache.set(key, value)
+    return value
+  } else return -1
+}
 
 /**
  * @param {number} key
  * @param {number} value
  * @return {void}
  */
-LRUCache.prototype.put = function (key, value) {}
+LRUCache.prototype.put = function (key, value) {
+  if (this.cache.has(key)) {
+    this.cache.delete(key)
+  } else {
+    if (this.cache.entries().length >= this.capacity) {
+      this.cache.delete(this.cache.keys().next().value)
+    }
+  }
+  this.cache.set(key, value)
+}
 
 /**
  * Your LRUCache object will be instantiated and called as such:
