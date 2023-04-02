@@ -66,3 +66,11 @@ https://segmentfault.com/a/1190000039691657
 diff:[15张图，20分钟吃透Diff算法核心原理，我说的！！！ - 掘金](https://juejin.cn/post/6994959998283907102)
 
 插槽：[slot | Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/v2/extend/slot.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
+
+
+
+# mini-vue阅读
+
+## reactive
+
+Reflect的好处： `receiver` 保留了对正确 `this` 的引用
