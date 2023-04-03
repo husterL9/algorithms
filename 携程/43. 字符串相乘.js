@@ -7,9 +7,35 @@ var multiply = function (num1, num2) {
   let len = Math.min(num1.length, num2.length)
   let multiplyNum = num1.length === len ? num1 : num2
   let multipliedNum = num1.length !== len ? num1 : num2
+  let resArr = []
   for (let index = len - 1; index >= 0; index++) {
     let digit = multiplyNum[index]
     let resStr = digitMultiply(multipliedNum, digit)
+    resStr = resStr.concat('0'.repeat(len - index - 1))
+    resArr.push(resStr)
+  }
+  function stringAdd(str1, str2) {
+    let minLen = Math.min(str1.length, str2.length)
+    let maxLen = Math.max(str1.length, str2.length)
+    let longStr = str1.length === maxLen ? str1 : str2
+    let shortStr = str1.length !== maxLen ? str1 : str2
+    let cutStr = longStr.slice(-maxLen)
+    let resArr = []
+    let carry = new Array(maxLen + 1).fill(0)
+    for (let index = minLen - 1; index >= 0; index--) {
+      let op1 = cutStr[index]
+      let op2 = cutStr[index]
+      let strToNum1 = parseInt(op1)
+      let strToNum2 = parseInt(op2)
+      let resNum = strToNum1 * strToNum2 + carry[index + 1]
+      let resStr = resNum.toString()
+      if (resNum >= 10) {
+        carry[index] = parseInt(resStr.charAt(0))
+        resArr.unshift(resStr.charAt(1))
+      } else {
+        resArr.unshift(resStr.charAt(0))
+      }
+    }
   }
   /**
    *
