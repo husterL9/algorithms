@@ -67,10 +67,26 @@ diff:[15张图，20分钟吃透Diff算法核心原理，我说的！！！ - 掘
 
 插槽：[slot | Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/v2/extend/slot.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
 
-
-
 # mini-vue阅读
 
 ## reactive
 
 Reflect的好处： `receiver` 保留了对正确 `this` 的引用
+
+依赖收集过程：拦截对象的get，set；在get中调用track(),收集effect（这里effect是如何收集的呢，使用了高阶函数，引入activeEffect变量）
+
+```js
+const effect = eff => {
+  activeEffect = eff; // 1. 将 eff 函数赋值给 activeEffect
+  activeEffect();     // 2. 执行 activeEffect
+  activeEffect = null;// 3. 重置 activeEffect
+}
+```
+
+在调用activeEffect()时，进入到依赖收集（即目标对象的某个key的get中），此时activeEffect == eff，将activeEffect收集到副作用当中(dep.add(activeEffect))
+
+
+
+参考文章：[探索 Vue3 响应式原理-阿里云开发者社区](https://developer.aliyun.com/article/909951#slide-13)
+
+  [vue3.0 响应式原理(超详细) - 掘金](https://juejin.cn/post/6858899262596448270#heading-24)
