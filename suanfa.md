@@ -53,9 +53,58 @@ O(m+n)的解法
 
 ## 哈希表
 
+# 字节跳动
+
+## 国际化安全
+
+### 22. 括号生成
+
+动态规划：F(n)='('+F(n-i)+')'+F(i)
+
+dfs:回溯+减枝
+
+# 携程
+
+## 43.字符串相乘
+
+"123456789" "987654321"，不能全过，艹，麻烦死了
+
 # 计网
 
 https://segmentfault.com/a/1190000039691657
+
+## 基础篇
+
+### 2.2
+
+#### 协议栈
+
+ IP 中还包括 `ICMP` 协议和 `ARP` 协议
+
+**URG**：(**URG**ent)紧急
+**ACK**：(**ACK**nowledgment)确认
+**PSH**：(**P**u**SH**)推送
+**RST**：(**R**e**S**e**T**)复位
+**SYN**：(**SYN**chronization) 同步
+**FIN**:（**FIN**ish）终止
+
+## tcp篇
+
+### 4.1
+
+#### 为什么是三次握手？不是两次、四次？
+
+最重要的原因：三次握手才可以阻止重复历史连接的初始化
+
+两次握手为什么可以建立两个连接？一个四元组不是可以确定一个连接吗
+
+![](C:\Users\刘纪伟\AppData\Roaming\marktext\images\2023-04-09-01-16-27-image.png)
+
+ISN：**初始化序列号（initial sequence number）**
+
+MTU（Maximum Transmission Unit）
+
+MSS（Maximum Segment Size）
 
 # Vue
 
@@ -67,9 +116,9 @@ diff:[15张图，20分钟吃透Diff算法核心原理，我说的！！！ - 掘
 
 插槽：[slot | Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/v2/extend/slot.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
 
-# mini-vue阅读
+## mini-vue阅读
 
-## reactive
+### reactive
 
 Reflect的好处： `receiver` 保留了对正确 `this` 的引用
 
@@ -85,8 +134,12 @@ const effect = eff => {
 
 在调用activeEffect()时，进入到依赖收集（即目标对象的某个key的get中），此时activeEffect == eff，将activeEffect收集到副作用当中(dep.add(activeEffect))
 
-
-
 参考文章：[探索 Vue3 响应式原理-阿里云开发者社区](https://developer.aliyun.com/article/909951#slide-13)
 
   [vue3.0 响应式原理(超详细) - 掘金](https://juejin.cn/post/6858899262596448270#heading-24)
+
+## Vue设计与实现
+
+### reactive
+
+P46:为什么对象级别用weakmap,而target中的key使用map（如果target[key]也是一个对象呢）

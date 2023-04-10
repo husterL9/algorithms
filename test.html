@@ -9,44 +9,26 @@
 
   <body>
     <script>
-      let req1 = () =>
-        fetch(`http://www.kuaidi100.com/query?type=shunfeng&postid=0`, {
-          mode: 'no-cors',
+      async function async1() {
+        console.log('async1 start')
+        await Promise.resolve('micro111').then((res) => {
+          console.log(res)
         })
-
-      let req2 = () =>
-        fetch(`http://www.kuaidi100.com/query?type=shunfeng&postid=1`, {
-          mode: 'no-cors',
+        Promise.resolve('micro').then((res) => {
+          console.log(res)
         })
-
-      let req3 = () =>
-        fetch(`http://www.kuaidi100.com/query?type=shunfeng&postid=2`, {
-          mode: 'no-cors',
-        })
-
-      // promise.all
-      // const res = Promise.all([req1(), req2(), req3()])
-
-      // const res1 = req1()
-      // const res2 = req2()
-      // const res3 = req3()
-
-      // await
-      const u1 = (async function () {
-        console.log('u1')
-        await req1()
-        await req2()
-      })()
-      // const u2 = (async function () {
-      //   console.log('u2')
-      //   await req2()
-      // })()
-      const u3 = (async function () {
-        console.log('u3')
-        await req3()
-      })()
-
-      console.log(11)
+        console.log('async1 end')
+        return '2end'
+      }
+      async function async2() {
+        let res = await async1()
+        console.log(res)
+      }
+      async2()
+      console.log(111)
+      new Promise((resolve) => {
+        resolve('2')
+      }).then(console.log)
     </script>
   </body>
 </html>

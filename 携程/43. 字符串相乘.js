@@ -11,8 +11,14 @@ var multiply = function (num1, num2) {
   for (let index = len - 1; index >= 0; index--) {
     let digit = multiplyNum[index]
     let resStr = digitMultiply(multipliedNum, digit)
+    if (resStr === '0') {
+      continue
+    }
     resStr = resStr.concat('0'.repeat(len - index - 1))
     resArr.push(resStr)
+  }
+  if (resArr.length === 0) {
+    return '0'
   }
   let res = resArr.reduce((pre, now) => {
     return stringAdd(pre, now)
@@ -31,7 +37,7 @@ var multiply = function (num1, num2) {
       let op2 = shortStr[index]
       let strToNum1 = parseInt(op1)
       let strToNum2 = parseInt(op2)
-      let resNum = strToNum1 * strToNum2 + carry[index + 1]
+      let resNum = strToNum1 + strToNum2 + carry[index + 1]
       let resStr = resNum.toString()
       if (resNum >= 10) {
         carry[index] = parseInt(resStr.charAt(0))
@@ -40,11 +46,7 @@ var multiply = function (num1, num2) {
         resArr.unshift(resStr.charAt(0))
       }
     }
-    for (
-      let index = longStr.slice(0, -minLen).length - 1;
-      index >= 0;
-      index--
-    ) {
+    for (let index = longStr.slice(0, -minLen).length - 1; index >= 0; index--) {
       let resNum = parseInt(longStr.charAt(index)) + carry[index + 1]
       let resStr = resNum.toString()
       if (resNum > 10) {
@@ -57,7 +59,7 @@ var multiply = function (num1, num2) {
     if (carry[0] !== 0) {
       return resArr.join('')
     }
-    resArr.unshift(carry[0].toString())
+    if (carry[0] !== 0) resArr.unshift(carry[0].toString())
     return resArr.join('')
   }
   /**
@@ -70,9 +72,9 @@ var multiply = function (num1, num2) {
     let len = num.length
     let resArr = []
     digit = typeof digit === 'number' ? digit : parseInt(digit)
-    // if (digit === 0) {
-    //   return '0'
-    // }
+    if (digit === 0) {
+      return '0'
+    }
     let carry = new Array(len + 1).fill(0)
     for (let index = len - 1; index >= 0; index--) {
       const strToNum = parseInt(num[index])
@@ -91,4 +93,4 @@ var multiply = function (num1, num2) {
     return resArr.join('')
   }
 }
-multiply('123', '456')
+console.log(multiply('123', '456'))
