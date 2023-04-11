@@ -1,10 +1,5 @@
-const module2 = {
-  x: 42,
-  getX: function () {
-    return this.x
-  },
+function mybind(fn, thisArg, ...args) {
+  return (...yourArgs) => {
+    fn.call(thisArg, ...args, ...yourArgs)
+  }
 }
-
-const unboundGetX = module2.getX
-console.log(unboundGetX())
-Function.prototype.bind = function () {}

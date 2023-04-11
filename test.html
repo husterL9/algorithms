@@ -9,26 +9,9 @@
 
   <body>
     <script>
-      async function async1() {
-        console.log('async1 start')
-        await Promise.resolve('micro111').then((res) => {
-          console.log(res)
-        })
-        Promise.resolve('micro').then((res) => {
-          console.log(res)
-        })
-        console.log('async1 end')
-        return '2end'
-      }
-      async function async2() {
-        let res = await async1()
-        console.log(res)
-      }
-      async2()
-      console.log(111)
-      new Promise((resolve) => {
-        resolve('2')
-      }).then(console.log)
+      let arr = []
+      arr[1] = 0
+      console.log(arr, arr.length)
     </script>
   </body>
 </html>

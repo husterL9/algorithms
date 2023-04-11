@@ -29,5 +29,8 @@ var postorderTraversal = function (root) {
     return res
   }
   //[1,null,2,3]
-  while (roo) {}
+  while (root) {
+    stack.push(root)
+    root = root.left
+  }
 }
