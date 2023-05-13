@@ -9,9 +9,13 @@
 
   <body>
     <script>
-      let arr = []
-      arr[1] = 0
-      console.log(arr, arr.length)
+      try {
+        new Promise(() => {
+          throw new Error('test')
+        })
+      } catch (error) {
+        console.log(error)
+      }
     </script>
   </body>
 </html>
